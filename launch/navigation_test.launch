@@ -1,0 +1,8 @@
+<launch>
+    <node name="navigation_test" pkg="navigation_test" type="navigation_test_node" output="screen" >
+        <param name="distance_threshold" value="8.0"/>
+        <param name="heading_bins" value="20"/>
+        <param name="number_of_tests" value="20"/>
+        <param name="robot_radius" value="0.5"/>
+    </node>
+</launch>

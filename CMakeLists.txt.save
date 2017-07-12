@@ -1,0 +1,40 @@
+cmake_minimum_required(VERSION 2.8.3)
+project(navigation_test)
+
+add_definitions(-std=c++11)
+
+find_package(catkin REQUIRED COMPONENTS
+  actionlib
+  costmap_2d
+  geometry_msgs
+  map_msgs
+  move_base_msgs
+  nav_msgs
+  roscpp
+  std_msgs
+  tf
+  visualization_msgs
+)
+
+catkin_package(
+  INCLUDE_DIRS include/navigation_test
+  CATKIN_DEPENDS actionlib costmap_2d geometry_msgs map_msgs move_base_msgs nav_msgs roscpp std_msgs tf visualization_msgs
+)
+
+include_directories(include/can_msg_hub)
+include_directories(
+  ${catkin_INCLUDE_DIRS}
+)
+
+
+set(CAN_HUB_SOURCE
+    ${PROJECT_SOURCE_DIR}/src/can_msg_hub_node.cpp
+    ${PROJECT_SOURCE_DIR}/src/can_msg_hub.cpp
+    ${PROJECT_SOURCE_DIR}/src/message_handlers/PowerStateMsgHandler.cpp
+    ${PROJECT_SOURCE_DIR}/src/message_handlers/TorsoMsgHandler.cpp
+    ${PROJECT_SOURCE_DIR}/src/message_handlers/RoboclawMsgHandler.cpp
+    ${PROJECT_SOURCE_DIR}/src/message_handlers/LEDMsgHandler.cpp)
+
+add_executable(can_msg_hub_node ${CAN_HUB_SOURCE})
+target_link_libraries(can_msg_hub_node ${catkin_LIBRARIES})
+
