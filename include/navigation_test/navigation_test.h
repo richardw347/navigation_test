@@ -22,6 +22,20 @@
 
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
 
+/*
+ * Navigation Test class
+ *
+ * This program works with the ROS navigation stack and provides a tool to test a robots navigation configuration. The
+ * program gets the world map from the map server and will use this to generate random goal points. There are a number
+ * of parameters which change how the map points are generated:
+ *
+ * distance_threshold: The goal point has to be outside this distance radius.
+ * robot_radius: The program checks the radius around the goal point to make sure there is enough space for the robot
+ *                this parameter defines how large this area is.
+ * heading_bins: The possible heading values are discretized to reduce the number of possible orientations, this
+ *               parameter defines the number of discrete orientations.
+ * num_tests: Defines how many navigation tests to run.
+ */
 class NavigationTest{
 public:
     NavigationTest();
